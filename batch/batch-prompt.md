@@ -96,6 +96,8 @@ value from that job message.
 | `{{DATE}}` | `<date from the job message>` | the job message's `Date:` line |
 | `{{ID}}` | `<batch ID from the job message>` | the job message's `Batch ID:` line |
 
+**Original URL is per-job provenance:** copy that job message's `URL:` value unchanged into the report's `**URL:**` and `**Original URL:**` headers. Do not replace it with a redirect destination, ATS API URL, or JD archive path. Keep the URL paired with its own title, company, report number, archived JD, and Machine Summary throughout batch processing.
+
 ---
 
 ## Template Placeholders

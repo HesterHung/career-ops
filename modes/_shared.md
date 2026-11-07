@@ -315,3 +315,33 @@ In an unattended run, at every gate that would ask, confirm, approve or wait:
 - Working demo + metrics > perfection
 - Apply sooner > learn more
 - 80/20 approach, timebox everything
+
+
+## Mandatory Job Posting URL Preservation
+
+Every discovered or evaluated job MUST retain its original
+job posting URL.
+
+For every job report, include:
+
+- Original job posting URL (mandatory)
+- Direct application URL (if different and available)
+- Source job board
+- Listing status (active, expired, or unverified)
+
+Rules:
+1. Preserve the original URL from the source listing.
+2. Never invent, reconstruct, or guess URLs.
+3. Do not substitute a company homepage for a job posting URL.
+4. If the original posting URL is unavailable, explicitly
+   mark it as "URL unavailable".
+5. Preserve URLs when transferring jobs between scan,
+   triage, evaluation, batch and tracker workflows.
+6. Cached job descriptions must retain their source URL.
+
+For A-G evaluations, display the job posting URL prominently
+at the beginning of each evaluation.
+
+For comparison reports, include a clickable job posting
+link for every evaluated role.
+

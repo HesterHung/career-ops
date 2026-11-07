@@ -704,6 +704,9 @@ Save full evaluation in `reports/{###}-{company-slug}-{YYYY-MM-DD}.md`.
 
 **Date:** {YYYY-MM-DD}
 **URL:**
+**Original URL:** {original job posting URL supplied by the user or pipeline; preserve unchanged even if retrieval redirects or uses an ATS API}
+**Company:** {company}
+**Role:** {job title}
 **Via:** {agency/recruiter firm, or — for direct applications}
 **Archetype:** {detected}
 <!-- When the role matches one of the user's targets, name it. When it matches
@@ -719,6 +722,8 @@ Save full evaluation in `reports/{###}-{company-slug}-{YYYY-MM-DD}.md`.
 **Legitimacy:** {High Confidence | Proceed with Caution | Suspicious}
 **Work Auth:** {✅ Sponsors | ➖ Not needed | ⚠️ Unstated | ⛔ No sponsorship}
 **PDF:** {path or pending}
+
+The report must include the complete A–H evaluation as defined in this mode, final score and verdict, Risk Summary, and the required archived-verbatim JD section or its canonical report-linked archive reference. Preserve the A–H scoring criteria unchanged.
 
 {the `## Verdict (lead)` sentence, copied verbatim}
 

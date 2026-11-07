@@ -38,6 +38,8 @@ When `PROJECT_ROOT` is a plugin install copy, the session's working folder is no
 - In Pi, this skill is auto-discovered from `.agents/skills/career-ops/` and exposed as `/skill:career-ops`; `AGENTS.md` loads from the repo root as project context, so there is no wrapper file. Headless Pi workers use `pi -p "prompt"`. Project skill discovery follows Pi's per-folder trust decision: `/trust` applies to future Pi processes, so restart `pi` before invoking `/skill:career-ops` (`-a` trusts a single run and needs no restart).
 - Interactive Codex sessions use `codex` in the repo root. Slash commands are not guaranteed in Codex, so ask Codex to run the same mode by name if `/career-ops` is unavailable.
 - Headless Codex workers use `codex exec "prompt"`.
+- Natural-language Codex requests for `scan`, `triage`, `batch`, `oferta`, `ofertas`, and `pipeline` invoke the corresponding modes; see the examples in `CODEX.md`.
+- If Codex does not expose a usable Agent/subagent primitive, perform the mode's existing worker steps sequentially in the current session, preserving inputs, checks, outputs, and safety rules.
 - The routing semantics below stay the same regardless of whether the entrypoint is a slash command or a natural-language prompt.
 
 Codex prompt examples that map to the same router semantics:

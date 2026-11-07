@@ -581,23 +581,41 @@ function buildEducation(entries, partial) {
     }).join('\n  ');
   }
 
-  const { entryTemplate, blocks } = partial;
+    const { entryTemplate, blocks } = partial;
   return entries.filter(e => hasRequiredFields(e, 'education', 'html')).map(e => {
+    const descText = e.description
+      || (Array.isArray(e.bullets) ? e.bullets.filter(Boolean).join(' ') : '');
     const blockValues = new Map([
-      ['ORG_BLOCK',      { value: escapeHtml(e.org || ''),         present: Boolean(e.org) }],
-      ['LOCATION_BLOCK', { value: escapeHtml(e.location || ''),    present: Boolean(e.location) }],
-      ['DESC_BLOCK',     { value: escapeHtml(e.description || ''), present: Boolean(e.description) }],
+      ['ORG_BLOCK',      { value: escapeHtml(e.org || ''),      present: Boolean(e.org) }],
+      ['LOCATION_BLOCK', { value: escapeHtml(e.location || ''), present: Boolean(e.location) }],
+      ['DESC_BLOCK',     { value: escapeHtml(descText),         present: Boolean(descText) }],
     ]);
-    return fillEntry(entryTemplate, blocks, {
+    // A bullets array with 2+ items and no description renders one DESC_BLOCK
+    // per bullet, so a section partial can wrap each in its own <li> and the
+    // marker stays CSS-generated. A bullet glyph typed into the description
+    // cannot work: generate-pdf.mjs rewrites U+2022 to " | " and collapses the
+    // surrounding whitespace, flattening the list into one run.
+    let entryBlocks = blocks;
+    const multi = !e.description && Array.isArray(e.bullets)
+      ? e.bullets.filter(Boolean) : [];
+    const descBlock = blocks.get('DESC_BLOCK');
+    if (multi.length > 1 && descBlock) {
+      const literalBraces = (t) => escapeHtml(t).replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
+      const present = multi
+        .map(b => descBlock.present.replace(/\{\{(DESC_BLOCK|DESC)\}\}/g, () => literalBraces(b)))
+        .join('\n  ');
+      entryBlocks = new Map(blocks);
+      entryBlocks.set('DESC_BLOCK', { ...descBlock, present });
+    }
+    return fillEntry(entryTemplate, entryBlocks, {
       TITLE:    escapeHtml(e.title || ''),
       ORG:      escapeHtml(e.org || ''),
       LOCATION: escapeHtml(e.location || ''),
       YEAR:     escapeHtml(e.year || ''),
-      DESC:     escapeHtml(e.description || ''),
+      DESC:     escapeHtml(descText),
     }, blockValues);
   }).join('\n  ');
 }
-
 function buildCertifications(entries, partial) {
   if (!Array.isArray(entries) || entries.length === 0) return '';
   if (!partial) {

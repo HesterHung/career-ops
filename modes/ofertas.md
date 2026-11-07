@@ -17,6 +17,6 @@ Scoring matrix with 10 weighted dimensions:
 
 For each job: score per dimension and total weighted score.
 Final ranking + recommendation with time-to-offer considerations.
-All reports must include **URL:** and **Legitimacy:** fields in the output header.
+For each compared job, preserve and display the source report's original **URL:** unchanged alongside its **Legitimacy:** field. Do not substitute a redirect destination, ATS API endpoint, or archive path.
 
 Ask the user for job postings if they are not in context. These can be text, URLs, or references to jobs already evaluated in the tracker.

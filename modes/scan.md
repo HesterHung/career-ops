@@ -8,7 +8,7 @@ Scans configured job portals, filters by title relevance, and adds new offers to
 
 ## Recommended Execution
 
-Execute as a worker/subagent if your CLI supports it, to avoid consuming the main interactive context:
+Execute as a worker/subagent if your CLI supports it, to avoid consuming the main interactive context. If no usable Agent/subagent primitive is available, run the scan steps sequentially in the current session with the same bounds and rules:
 
 ```python
 Agent(

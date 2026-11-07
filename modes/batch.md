@@ -93,6 +93,20 @@ node reserve-report-num.mjs --release 042-049
 - **4-hour protection window.** Sentinels older than 4h are garbage-collected (`verify-pipeline.mjs` triggers this). Reserve the range immediately before spawning workers, not at the start of a long session. Once a worker writes its real report, that slot is permanently safe — only slow or unstarted slots are at risk after 4h.
 - **Gaps are normal.** If a reservation collides and restarts, skipped numbers (e.g. `006`) are never reused. Report numbers are opaque IDs; a gap is not corruption.
 
+## Codex sequential fallback
+
+When Codex cannot delegate through an Agent/subagent primitive, process each
+triaged job sequentially using the same worker prompt, URL, report-number
+reservation, output validation, and tracker merge rules. Do not omit jobs or
+weaken the evaluation. Keep the batch-state URL paired with its report.
+
+## Codex sequential fallback
+
+When Codex cannot delegate through an Agent/subagent primitive, process each
+triaged job sequentially using the same worker prompt, URL, report-number
+reservation, output validation, and tracker merge rules. Do not omit jobs or
+weaken the evaluation. Keep the batch-state URL paired with its report.
+
 ## Mode B: Standalone script
 
 ```bash
